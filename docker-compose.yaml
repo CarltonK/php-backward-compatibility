@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  php56:
+    build: ./php56_app
+    container_name: php56_app
+    volumes:
+      - ./php56_app:/var/www/html
+    ports:
+      - 8056:80
+    networks:
+      - gps_network
+    depends_on:
+      - mariadb
+
+  php8:
+    build: ./php8_app
+    container_name: php8_app
+    volumes:
+      - ./php8_app:/var/www/html
+    ports:
+      - 8080:80
+    networks:
+      - gps_network
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb:10.3
+    container_name: maria_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    volumes:
+      - gps_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - gps_network
+
+volumes:
+  gps_data:
+
+networks:
+  gps_network:
