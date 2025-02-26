@@ -9,5 +9,6 @@ docker compose up
 ```
 
 ## Access the app
-Version 5.6 can be found at http://localhost:8056
-Version 8 can be found at http://localhost:8080
+PHP 5.6 → http://localhost:8056
+
+PHP 8.0 → http://localhost:8080
